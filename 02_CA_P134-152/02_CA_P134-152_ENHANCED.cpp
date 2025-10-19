@@ -742,6 +742,87 @@ void problem136_viewTutorial() {
     cout << "    }\n";
     cout << "};\n\n";
 
+    cout << "Python Solution:\n";
+    cout << "import heapq\nfrom collections import defaultdict\n\n";
+    cout << "class Solution:\n";
+    cout << "    def minimumWeight(self, n, edges, src1, src2, dest):\n";
+    cout << "        def dijkstra(graph, start):\n";
+    cout << "            dist = [float('inf')] * n\n";
+    cout << "            dist[start] = 0\n";
+    cout << "            pq = [(0, start)]\n";
+    cout << "            \n";
+    cout << "            while pq:\n";
+    cout << "                d, u = heapq.heappop(pq)\n";
+    cout << "                if d > dist[u]:\n";
+    cout << "                    continue\n";
+    cout << "                for w, v in graph[u]:\n";
+    cout << "                    if dist[u] + w < dist[v]:\n";
+    cout << "                        dist[v] = dist[u] + w\n";
+    cout << "                        heapq.heappush(pq, (dist[v], v))\n";
+    cout << "            return dist\n";
+    cout << "        \n";
+    cout << "        adj = defaultdict(list)\n";
+    cout << "        rev_adj = defaultdict(list)\n";
+    cout << "        \n";
+    cout << "        for u, v, w in edges:\n";
+    cout << "            adj[u].append((w, v))\n";
+    cout << "            rev_adj[v].append((w, u))\n";
+    cout << "        \n";
+    cout << "        d1 = dijkstra(adj, src1)\n";
+    cout << "        d2 = dijkstra(adj, src2)\n";
+    cout << "        d3 = dijkstra(rev_adj, dest)\n";
+    cout << "        \n";
+    cout << "        ans = float('inf')\n";
+    cout << "        for i in range(n):\n";
+    cout << "            if d1[i] != float('inf') and d2[i] != float('inf') and d3[i] != float('inf'):\n";
+    cout << "                ans = min(ans, d1[i] + d2[i] + d3[i])\n";
+    cout << "        \n";
+    cout << "        return ans if ans != float('inf') else -1\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var minimumWeight = function(n, edges, src1, src2, dest) {\n";
+    cout << "    const dijkstra = (graph, start) => {\n";
+    cout << "        const dist = new Array(n).fill(Infinity);\n";
+    cout << "        const pq = new MinPriorityQueue({ priority: x => x[0] });\n";
+    cout << "        dist[start] = 0;\n";
+    cout << "        pq.enqueue([0, start]);\n";
+    cout << "        \n";
+    cout << "        while (!pq.isEmpty()) {\n";
+    cout << "            const [d, u] = pq.dequeue().element;\n";
+    cout << "            if (d > dist[u]) continue;\n";
+    cout << "            \n";
+    cout << "            for (const [w, v] of graph[u] || []) {\n";
+    cout << "                if (dist[u] + w < dist[v]) {\n";
+    cout << "                    dist[v] = dist[u] + w;\n";
+    cout << "                    pq.enqueue([dist[v], v]);\n";
+    cout << "                }\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        return dist;\n";
+    cout << "    };\n";
+    cout << "    \n";
+    cout << "    const adj = Array.from({length: n}, () => []);\n";
+    cout << "    const revAdj = Array.from({length: n}, () => []);\n";
+    cout << "    \n";
+    cout << "    for (const [u, v, w] of edges) {\n";
+    cout << "        adj[u].push([w, v]);\n";
+    cout << "        revAdj[v].push([w, u]);\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    const d1 = dijkstra(adj, src1);\n";
+    cout << "    const d2 = dijkstra(adj, src2);\n";
+    cout << "    const d3 = dijkstra(revAdj, dest);\n";
+    cout << "    \n";
+    cout << "    let ans = Infinity;\n";
+    cout << "    for (let i = 0; i < n; i++) {\n";
+    cout << "        if (d1[i] !== Infinity && d2[i] !== Infinity && d3[i] !== Infinity) {\n";
+    cout << "            ans = Math.min(ans, d1[i] + d2[i] + d3[i]);\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return ans === Infinity ? -1 : ans;\n";
+    cout << "};\n\n";
+
     cout << "Example:\n";
     cout << "Input: n = 6, edges = [[0,2,2],[0,5,6],[1,0,3],[1,4,5],[2,1,1],[2,3,3],[2,3,4],[3,4,2],[4,5,1]], src1 = 0, src2 = 1, dest = 5\n";
     cout << "Output: 9\n\n";
@@ -1043,6 +1124,46 @@ void problem137_viewTutorial() {
     cout << "    }\n";
     cout << "};\n\n";
 
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def minimumDifference(self, nums):\n";
+    cout << "        total = sum(nums)\n";
+    cout << "        target = total // 2\n";
+    cout << "        dp = [False] * (target + 1)\n";
+    cout << "        dp[0] = True\n";
+    cout << "        \n";
+    cout << "        for num in nums:\n";
+    cout << "            for j in range(target, num - 1, -1):\n";
+    cout << "                dp[j] = dp[j] or dp[j - num]\n";
+    cout << "        \n";
+    cout << "        for i in range(target, -1, -1):\n";
+    cout << "            if dp[i]:\n";
+    cout << "                return total - 2 * i\n";
+    cout << "        \n";
+    cout << "        return total\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var minimumDifference = function(nums) {\n";
+    cout << "    const total = nums.reduce((sum, num) => sum + num, 0);\n";
+    cout << "    const target = Math.floor(total / 2);\n";
+    cout << "    const dp = new Array(target + 1).fill(false);\n";
+    cout << "    dp[0] = true;\n";
+    cout << "    \n";
+    cout << "    for (const num of nums) {\n";
+    cout << "        for (let j = target; j >= num; j--) {\n";
+    cout << "            dp[j] = dp[j] || dp[j - num];\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    for (let i = target; i >= 0; i--) {\n";
+    cout << "        if (dp[i]) {\n";
+    cout << "            return total - 2 * i;\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return total;\n";
+    cout << "};\n\n";
+
     cout << "Example:\n";
     cout << "Input: [3,9,7,3]\n";
     cout << "Output: 2\n";
@@ -1280,6 +1401,42 @@ void problem138_viewTutorial() {
     cout << "    }\n";
     cout << "};\n\n";
 
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def minCost(self, n, cuts):\n";
+    cout << "        cuts = [0] + cuts + [n]\n";
+    cout << "        cuts.sort()\n";
+    cout << "        m = len(cuts)\n";
+    cout << "        dp = [[0] * m for _ in range(m)]\n";
+    cout << "        \n";
+    cout << "        for length in range(2, m):\n";
+    cout << "            for i in range(m - length):\n";
+    cout << "                j = i + length\n";
+    cout << "                dp[i][j] = float('inf')\n";
+    cout << "                for k in range(i + 1, j):\n";
+    cout << "                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j] + cuts[j] - cuts[i])\n";
+    cout << "        \n";
+    cout << "        return dp[0][m - 1]\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var minCost = function(n, cuts) {\n";
+    cout << "    cuts = [0, ...cuts, n].sort((a, b) => a - b);\n";
+    cout << "    const m = cuts.length;\n";
+    cout << "    const dp = Array.from({length: m}, () => Array(m).fill(0));\n";
+    cout << "    \n";
+    cout << "    for (let len = 2; len < m; len++) {\n";
+    cout << "        for (let i = 0; i + len < m; i++) {\n";
+    cout << "            const j = i + len;\n";
+    cout << "            dp[i][j] = Infinity;\n";
+    cout << "            for (let k = i + 1; k < j; k++) {\n";
+    cout << "                dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k][j] + cuts[j] - cuts[i]);\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return dp[0][m - 1];\n";
+    cout << "};\n\n";
+
     cout << "Example:\n";
     cout << "Input: n = 7, cuts = [1,3,4,5]\n";
     cout << "Output: 16\n";
@@ -1463,6 +1620,122 @@ void problem139_viewTutorial() {
     cout << "3. When opening a box: collect candies, get keys, get new boxes\n";
     cout << "4. Keys can unlock boxes we already have\n";
     cout << "5. New boxes can be opened if we have their keys\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <vector>\n#include <queue>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int maxCandies(vector<int>& status, vector<int>& candies, vector<vector<int>>& keys, vector<vector<int>>& containedBoxes, vector<int>& initialBoxes) {\n";
+    cout << "        queue<int> q;\n";
+    cout << "        vector<bool> opened(status.size(), false);\n";
+    cout << "        vector<bool> hasBox(status.size(), false);\n";
+    cout << "        \n";
+    cout << "        for (int box : initialBoxes) {\n";
+    cout << "            hasBox[box] = true;\n";
+    cout << "            if (status[box]) {\n";
+    cout << "                q.push(box);\n";
+    cout << "                opened[box] = true;\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        int totalCandies = 0;\n";
+    cout << "        while (!q.empty()) {\n";
+    cout << "            int box = q.front();\n";
+    cout << "            q.pop();\n";
+    cout << "            totalCandies += candies[box];\n";
+    cout << "            \n";
+    cout << "            for (int key : keys[box]) {\n";
+    cout << "                status[key] = 1;\n";
+    cout << "                if (hasBox[key] && !opened[key]) {\n";
+    cout << "                    q.push(key);\n";
+    cout << "                    opened[key] = true;\n";
+    cout << "                }\n";
+    cout << "            }\n";
+    cout << "            \n";
+    cout << "            for (int newBox : containedBoxes[box]) {\n";
+    cout << "                hasBox[newBox] = true;\n";
+    cout << "                if (status[newBox] && !opened[newBox]) {\n";
+    cout << "                    q.push(newBox);\n";
+    cout << "                    opened[newBox] = true;\n";
+    cout << "                }\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return totalCandies;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "from collections import deque\n\n";
+    cout << "class Solution:\n";
+    cout << "    def maxCandies(self, status, candies, keys, containedBoxes, initialBoxes):\n";
+    cout << "        q = deque()\n";
+    cout << "        opened = [False] * len(status)\n";
+    cout << "        hasBox = [False] * len(status)\n";
+    cout << "        \n";
+    cout << "        for box in initialBoxes:\n";
+    cout << "            hasBox[box] = True\n";
+    cout << "            if status[box]:\n";
+    cout << "                q.append(box)\n";
+    cout << "                opened[box] = True\n";
+    cout << "        \n";
+    cout << "        totalCandies = 0\n";
+    cout << "        while q:\n";
+    cout << "            box = q.popleft()\n";
+    cout << "            totalCandies += candies[box]\n";
+    cout << "            \n";
+    cout << "            for key in keys[box]:\n";
+    cout << "                status[key] = 1\n";
+    cout << "                if hasBox[key] and not opened[key]:\n";
+    cout << "                    q.append(key)\n";
+    cout << "                    opened[key] = True\n";
+    cout << "            \n";
+    cout << "            for newBox in containedBoxes[box]:\n";
+    cout << "                hasBox[newBox] = True\n";
+    cout << "                if status[newBox] and not opened[newBox]:\n";
+    cout << "                    q.append(newBox)\n";
+    cout << "                    opened[newBox] = True\n";
+    cout << "        \n";
+    cout << "        return totalCandies\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var maxCandies = function(status, candies, keys, containedBoxes, initialBoxes) {\n";
+    cout << "    const q = [];\n";
+    cout << "    const opened = new Array(status.length).fill(false);\n";
+    cout << "    const hasBox = new Array(status.length).fill(false);\n";
+    cout << "    \n";
+    cout << "    for (const box of initialBoxes) {\n";
+    cout << "        hasBox[box] = true;\n";
+    cout << "        if (status[box]) {\n";
+    cout << "            q.push(box);\n";
+    cout << "            opened[box] = true;\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    let totalCandies = 0;\n";
+    cout << "    while (q.length > 0) {\n";
+    cout << "        const box = q.shift();\n";
+    cout << "        totalCandies += candies[box];\n";
+    cout << "        \n";
+    cout << "        for (const key of keys[box]) {\n";
+    cout << "            status[key] = 1;\n";
+    cout << "            if (hasBox[key] && !opened[key]) {\n";
+    cout << "                q.push(key);\n";
+    cout << "                opened[key] = true;\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        for (const newBox of containedBoxes[box]) {\n";
+    cout << "            hasBox[newBox] = true;\n";
+    cout << "            if (status[newBox] && !opened[newBox]) {\n";
+    cout << "                q.push(newBox);\n";
+    cout << "                opened[newBox] = true;\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return totalCandies;\n";
+    cout << "};\n\n";
 }
 
 void problem139_runTests() {
@@ -1519,12 +1792,91 @@ public:
     }
 };
 
+void problem140_viewTutorial() {
+    printDivider();
+    cout << "                    Problem 140: Sum of Subarray Minimums\n";
+    printDivider();
+    cout << "Description: Find the sum of minimum values in all possible subarrays.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use monotonic stack to find previous and next smaller elements\n";
+    cout << "2. For each element, calculate how many subarrays it's the minimum of\n";
+    cout << "3. Count = (distance to prev smaller) * (distance to next smaller)\n";
+    cout << "4. Add element * count to result\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <vector>\n#include <stack>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int sumSubarrayMins(vector<int>& arr) {\n";
+    cout << "        const int MOD = 1e9 + 7;\n";
+    cout << "        int n = arr.size();\n";
+    cout << "        stack<int> st;\n";
+    cout << "        long long result = 0;\n";
+    cout << "        \n";
+    cout << "        for (int i = 0; i <= n; i++) {\n";
+    cout << "            while (!st.empty() && (i == n || arr[st.top()] >= arr[i])) {\n";
+    cout << "                int mid = st.top();\n";
+    cout << "                st.pop();\n";
+    cout << "                int left = st.empty() ? -1 : st.top();\n";
+    cout << "                int right = i;\n";
+    cout << "                long long count = (long long)(mid - left) * (right - mid);\n";
+    cout << "                result = (result + count * arr[mid]) % MOD;\n";
+    cout << "            }\n";
+    cout << "            st.push(i);\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return result;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def sumSubarrayMins(self, arr):\n";
+    cout << "        MOD = 10**9 + 7\n";
+    cout << "        n = len(arr)\n";
+    cout << "        stack = []\n";
+    cout << "        result = 0\n";
+    cout << "        \n";
+    cout << "        for i in range(n + 1):\n";
+    cout << "            while stack and (i == n or arr[stack[-1]] >= arr[i]):\n";
+    cout << "                mid = stack.pop()\n";
+    cout << "                left = -1 if not stack else stack[-1]\n";
+    cout << "                right = i\n";
+    cout << "                count = (mid - left) * (right - mid)\n";
+    cout << "                result = (result + count * arr[mid]) % MOD\n";
+    cout << "            stack.append(i)\n";
+    cout << "        \n";
+    cout << "        return result\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var sumSubarrayMins = function(arr) {\n";
+    cout << "    const MOD = 1e9 + 7;\n";
+    cout << "    const n = arr.length;\n";
+    cout << "    const stack = [];\n";
+    cout << "    let result = 0;\n";
+    cout << "    \n";
+    cout << "    for (let i = 0; i <= n; i++) {\n";
+    cout << "        while (stack.length && (i === n || arr[stack[stack.length - 1]] >= arr[i])) {\n";
+    cout << "            const mid = stack.pop();\n";
+    cout << "            const left = stack.length === 0 ? -1 : stack[stack.length - 1];\n";
+    cout << "            const right = i;\n";
+    cout << "            const count = (mid - left) * (right - mid);\n";
+    cout << "            result = (result + count * arr[mid]) % MOD;\n";
+    cout << "        }\n";
+    cout << "        stack.push(i);\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return result;\n";
+    cout << "};\n\n";
+}
+
 void problem140() {
     while (true) {
         int choice = displaySubmenu("Problem 140: Sum of Subarray Minimums");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nSum of minimums of all subarrays using monotonic stack.\n"; waitForEnter(); break;
+            case 1: problem140_viewTutorial(); waitForEnter(); break;
             case 2: { Solution140 sol; vector<int> test = {3,1,2,4}; cout << "\nResult: " << sol.sumSubarrayMins(test) << "\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -1569,12 +1921,114 @@ private:
     }
 };
 
+void problem141_viewTutorial() {
+    printDivider();
+    cout << "                   Problem 141: Longest Duplicate Substring\n";
+    printDivider();
+    cout << "Description: Find the longest duplicate substring in a given string.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use binary search on the length of substring\n";
+    cout << "2. For each length, check if there's a duplicate substring\n";
+    cout << "3. Use rolling hash or set to find duplicates efficiently\n";
+    cout << "4. Return the longest duplicate found\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <string>\n#include <unordered_set>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    string longestDupSubstring(string s) {\n";
+    cout << "        int left = 1, right = s.length();\n";
+    cout << "        string result = \"\";\n";
+    cout << "        \n";
+    cout << "        while (left <= right) {\n";
+    cout << "            int mid = left + (right - left) / 2;\n";
+    cout << "            string dup = searchDuplicate(s, mid);\n";
+    cout << "            if (!dup.empty()) {\n";
+    cout << "                result = dup;\n";
+    cout << "                left = mid + 1;\n";
+    cout << "            } else {\n";
+    cout << "                right = mid - 1;\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return result;\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "private:\n";
+    cout << "    string searchDuplicate(const string& s, int len) {\n";
+    cout << "        unordered_set<string> seen;\n";
+    cout << "        for (int i = 0; i <= (int)s.length() - len; i++) {\n";
+    cout << "            string sub = s.substr(i, len);\n";
+    cout << "            if (seen.count(sub)) return sub;\n";
+    cout << "            seen.insert(sub);\n";
+    cout << "        }\n";
+    cout << "        return \"\";\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def longestDupSubstring(self, s):\n";
+    cout << "        def search_duplicate(length):\n";
+    cout << "            seen = set()\n";
+    cout << "            for i in range(len(s) - length + 1):\n";
+    cout << "                sub = s[i:i + length]\n";
+    cout << "                if sub in seen:\n";
+    cout << "                    return sub\n";
+    cout << "                seen.add(sub)\n";
+    cout << "            return \"\"\n";
+    cout << "        \n";
+    cout << "        left, right = 1, len(s)\n";
+    cout << "        result = \"\"\n";
+    cout << "        \n";
+    cout << "        while left <= right:\n";
+    cout << "            mid = (left + right) // 2\n";
+    cout << "            dup = search_duplicate(mid)\n";
+    cout << "            if dup:\n";
+    cout << "                result = dup\n";
+    cout << "                left = mid + 1\n";
+    cout << "            else:\n";
+    cout << "                right = mid - 1\n";
+    cout << "        \n";
+    cout << "        return result\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var longestDupSubstring = function(s) {\n";
+    cout << "    const searchDuplicate = (len) => {\n";
+    cout << "        const seen = new Set();\n";
+    cout << "        for (let i = 0; i <= s.length - len; i++) {\n";
+    cout << "            const sub = s.substring(i, i + len);\n";
+    cout << "            if (seen.has(sub)) return sub;\n";
+    cout << "            seen.add(sub);\n";
+    cout << "        }\n";
+    cout << "        return \"\";\n";
+    cout << "    };\n";
+    cout << "    \n";
+    cout << "    let left = 1, right = s.length;\n";
+    cout << "    let result = \"\";\n";
+    cout << "    \n";
+    cout << "    while (left <= right) {\n";
+    cout << "        const mid = Math.floor((left + right) / 2);\n";
+    cout << "        const dup = searchDuplicate(mid);\n";
+    cout << "        if (dup) {\n";
+    cout << "            result = dup;\n";
+    cout << "            left = mid + 1;\n";
+    cout << "        } else {\n";
+    cout << "            right = mid - 1;\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return result;\n";
+    cout << "};\n\n";
+}
+
 void problem141() {
     while (true) {
         int choice = displaySubmenu("Problem 141: Longest Duplicate Substring");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nBinary search + rolling hash to find longest duplicate substring.\n"; waitForEnter(); break;
+            case 1: problem141_viewTutorial(); waitForEnter(); break;
             case 2: { Solution141 sol; cout << "\nResult: '" << sol.longestDupSubstring("banana") << "'\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -1608,12 +2062,86 @@ public:
     }
 };
 
+void problem142_viewTutorial() {
+    printDivider();
+    cout << "                   Problem 142: Max Consecutive Ones III\n";
+    printDivider();
+    cout << "Description: Find the maximum number of consecutive 1s after flipping at most k zeros.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use sliding window technique with two pointers\n";
+    cout << "2. Expand right pointer and count zeros in window\n";
+    cout << "3. When zeros > k, contract left pointer until zeros <= k\n";
+    cout << "4. Track maximum window size seen\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <vector>\n#include <algorithm>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int longestOnes(vector<int>& nums, int k) {\n";
+    cout << "        int left = 0, right = 0, maxLen = 0, zeroCount = 0;\n";
+    cout << "        \n";
+    cout << "        while (right < nums.size()) {\n";
+    cout << "            if (nums[right] == 0) zeroCount++;\n";
+    cout << "            \n";
+    cout << "            while (zeroCount > k) {\n";
+    cout << "                if (nums[left] == 0) zeroCount--;\n";
+    cout << "                left++;\n";
+    cout << "            }\n";
+    cout << "            \n";
+    cout << "            maxLen = max(maxLen, right - left + 1);\n";
+    cout << "            right++;\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return maxLen;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def longestOnes(self, nums, k):\n";
+    cout << "        left = right = max_len = zero_count = 0\n";
+    cout << "        \n";
+    cout << "        while right < len(nums):\n";
+    cout << "            if nums[right] == 0:\n";
+    cout << "                zero_count += 1\n";
+    cout << "            \n";
+    cout << "            while zero_count > k:\n";
+    cout << "                if nums[left] == 0:\n";
+    cout << "                    zero_count -= 1\n";
+    cout << "                left += 1\n";
+    cout << "            \n";
+    cout << "            max_len = max(max_len, right - left + 1)\n";
+    cout << "            right += 1\n";
+    cout << "        \n";
+    cout << "        return max_len\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var longestOnes = function(nums, k) {\n";
+    cout << "    let left = 0, right = 0, maxLen = 0, zeroCount = 0;\n";
+    cout << "    \n";
+    cout << "    while (right < nums.length) {\n";
+    cout << "        if (nums[right] === 0) zeroCount++;\n";
+    cout << "        \n";
+    cout << "        while (zeroCount > k) {\n";
+    cout << "            if (nums[left] === 0) zeroCount--;\n";
+    cout << "            left++;\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        maxLen = Math.max(maxLen, right - left + 1);\n";
+    cout << "        right++;\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return maxLen;\n";
+    cout << "};\n\n";
+}
+
 void problem142() {
     while (true) {
         int choice = displaySubmenu("Problem 142: Max Consecutive Ones III");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nSliding window: expand right, contract left when zeros > k.\n"; waitForEnter(); break;
+            case 1: problem142_viewTutorial(); waitForEnter(); break;
             case 2: { Solution142 sol; vector<int> test = {1,1,1,0,0,0,1,1,1,1,0}; cout << "\nResult: " << sol.longestOnes(test, 2) << "\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -1633,12 +2161,48 @@ public:
     }
 };
 
+void problem143_viewTutorial() {
+    printDivider();
+    cout << "                        Problem 143: Power of Two\n";
+    printDivider();
+    cout << "Description: Determine if a given integer is a power of two.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. A power of two has exactly one bit set in binary representation\n";
+    cout << "2. Use bit manipulation: n > 0 && (n & (n-1)) == 0\n";
+    cout << "3. (n & (n-1)) removes the rightmost set bit\n";
+    cout << "4. If result is 0, then n had exactly one bit set\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    bool isPowerOfTwo(int n) {\n";
+    cout << "        return n > 0 && (n & (n - 1)) == 0;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def isPowerOfTwo(self, n):\n";
+    cout << "        return n > 0 and (n & (n - 1)) == 0\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var isPowerOfTwo = function(n) {\n";
+    cout << "    return n > 0 && (n & (n - 1)) === 0;\n";
+    cout << "};\n\n";
+
+    cout << "Example:\n";
+    cout << "Input: 16\n";
+    cout << "Output: true (16 = 2^4)\n";
+    cout << "Binary: 16 = 10000, 15 = 01111, 16 & 15 = 0\n\n";
+}
+
 void problem143() {
     while (true) {
         int choice = displaySubmenu("Problem 143: Power of Two");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nBit manipulation: n > 0 && (n & (n-1)) == 0\n"; waitForEnter(); break;
+            case 1: problem143_viewTutorial(); waitForEnter(); break;
             case 2: { Solution143 sol; cout << "\nTest 16: " << (sol.isPowerOfTwo(16) ? "true" : "false") << "\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -1837,12 +2401,124 @@ public:
     }
 };
 
+void problem146_viewTutorial() {
+    printDivider();
+    cout << "            Problem 146: Shortest Path in Grid with Obstacles Elimination\n";
+    printDivider();
+    cout << "Description: Find shortest path in grid where you can eliminate up to k obstacles.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use BFS with state (x, y, obstacles_remaining)\n";
+    cout << "2. 3D visited array to track (position, remaining_eliminations)\n";
+    cout << "3. When hitting obstacle, use elimination if available\n";
+    cout << "4. Optimization: if k >= m+n-2, direct path always possible\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <vector>\n#include <queue>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int shortestPath(vector<vector<int>>& grid, int k) {\n";
+    cout << "        int m = grid.size(), n = grid[0].size();\n";
+    cout << "        if (k >= m + n - 2) return m + n - 2;\n";
+    cout << "        \n";
+    cout << "        vector<vector<vector<bool>>> visited(m, vector<vector<bool>>(n, vector<bool>(k + 1, false)));\n";
+    cout << "        queue<vector<int>> q;\n";
+    cout << "        q.push({0, 0, k, 0});\n";
+    cout << "        visited[0][0][k] = true;\n";
+    cout << "        \n";
+    cout << "        vector<vector<int>> dirs = {{0,1},{1,0},{0,-1},{-1,0}};\n";
+    cout << "        \n";
+    cout << "        while (!q.empty()) {\n";
+    cout << "            auto curr = q.front(); q.pop();\n";
+    cout << "            int x = curr[0], y = curr[1], obstacles = curr[2], steps = curr[3];\n";
+    cout << "            \n";
+    cout << "            if (x == m - 1 && y == n - 1) return steps;\n";
+    cout << "            \n";
+    cout << "            for (auto& dir : dirs) {\n";
+    cout << "                int nx = x + dir[0], ny = y + dir[1];\n";
+    cout << "                if (nx >= 0 && nx < m && ny >= 0 && ny < n) {\n";
+    cout << "                    int newObstacles = obstacles - grid[nx][ny];\n";
+    cout << "                    if (newObstacles >= 0 && !visited[nx][ny][newObstacles]) {\n";
+    cout << "                        visited[nx][ny][newObstacles] = true;\n";
+    cout << "                        q.push({nx, ny, newObstacles, steps + 1});\n";
+    cout << "                    }\n";
+    cout << "                }\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return -1;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "from collections import deque\n\n";
+    cout << "class Solution:\n";
+    cout << "    def shortestPath(self, grid, k):\n";
+    cout << "        m, n = len(grid), len(grid[0])\n";
+    cout << "        if k >= m + n - 2:\n";
+    cout << "            return m + n - 2\n";
+    cout << "        \n";
+    cout << "        visited = set()\n";
+    cout << "        q = deque([(0, 0, k, 0)])\n";
+    cout << "        visited.add((0, 0, k))\n";
+    cout << "        \n";
+    cout << "        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n";
+    cout << "        \n";
+    cout << "        while q:\n";
+    cout << "            x, y, obstacles, steps = q.popleft()\n";
+    cout << "            \n";
+    cout << "            if x == m - 1 and y == n - 1:\n";
+    cout << "                return steps\n";
+    cout << "            \n";
+    cout << "            for dx, dy in directions:\n";
+    cout << "                nx, ny = x + dx, y + dy\n";
+    cout << "                if 0 <= nx < m and 0 <= ny < n:\n";
+    cout << "                    new_obstacles = obstacles - grid[nx][ny]\n";
+    cout << "                    if new_obstacles >= 0 and (nx, ny, new_obstacles) not in visited:\n";
+    cout << "                        visited.add((nx, ny, new_obstacles))\n";
+    cout << "                        q.append((nx, ny, new_obstacles, steps + 1))\n";
+    cout << "        \n";
+    cout << "        return -1\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var shortestPath = function(grid, k) {\n";
+    cout << "    const m = grid.length, n = grid[0].length;\n";
+    cout << "    if (k >= m + n - 2) return m + n - 2;\n";
+    cout << "    \n";
+    cout << "    const visited = new Set();\n";
+    cout << "    const q = [[0, 0, k, 0]];\n";
+    cout << "    visited.add(`0,0,${k}`);\n";
+    cout << "    \n";
+    cout << "    const directions = [[0,1],[1,0],[0,-1],[-1,0]];\n";
+    cout << "    \n";
+    cout << "    while (q.length > 0) {\n";
+    cout << "        const [x, y, obstacles, steps] = q.shift();\n";
+    cout << "        \n";
+    cout << "        if (x === m - 1 && y === n - 1) return steps;\n";
+    cout << "        \n";
+    cout << "        for (const [dx, dy] of directions) {\n";
+    cout << "            const nx = x + dx, ny = y + dy;\n";
+    cout << "            if (nx >= 0 && nx < m && ny >= 0 && ny < n) {\n";
+    cout << "                const newObstacles = obstacles - grid[nx][ny];\n";
+    cout << "                const key = `${nx},${ny},${newObstacles}`;\n";
+    cout << "                if (newObstacles >= 0 && !visited.has(key)) {\n";
+    cout << "                    visited.add(key);\n";
+    cout << "                    q.push([nx, ny, newObstacles, steps + 1]);\n";
+    cout << "                }\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return -1;\n";
+    cout << "};\n\n";
+}
+
 void problem146() {
     while (true) {
         int choice = displaySubmenu("Problem 146: Shortest Path with Obstacles Elimination");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nBFS with state (x,y,obstacles_remaining). 3D visited array.\n"; waitForEnter(); break;
+            case 1: problem146_viewTutorial(); waitForEnter(); break;
             case 2: { Solution146 sol; vector<vector<int>> grid = {{0,0,0},{1,1,0},{0,0,0}}; cout << "\nResult: " << sol.shortestPath(grid, 1) << "\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -1874,12 +2550,86 @@ public:
     }
 };
 
+void problem147_viewTutorial() {
+    printDivider();
+    cout << "                        Problem 147: Sqrt(x)\n";
+    printDivider();
+    cout << "Description: Compute and return the square root of x (rounded down to nearest integer).\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use binary search on range [1, x]\n";
+    cout << "2. Find largest integer mid where mid*mid <= x\n";
+    cout << "3. Use long long to avoid overflow when computing mid*mid\n";
+    cout << "4. Return the largest valid mid found\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int mySqrt(int x) {\n";
+    cout << "        if (x == 0) return 0;\n";
+    cout << "        \n";
+    cout << "        long long left = 1, right = x;\n";
+    cout << "        while (left <= right) {\n";
+    cout << "            long long mid = left + (right - left) / 2;\n";
+    cout << "            long long square = mid * mid;\n";
+    cout << "            \n";
+    cout << "            if (square == x) return mid;\n";
+    cout << "            else if (square < x) left = mid + 1;\n";
+    cout << "            else right = mid - 1;\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return right;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def mySqrt(self, x):\n";
+    cout << "        if x == 0:\n";
+    cout << "            return 0\n";
+    cout << "        \n";
+    cout << "        left, right = 1, x\n";
+    cout << "        while left <= right:\n";
+    cout << "            mid = (left + right) // 2\n";
+    cout << "            square = mid * mid\n";
+    cout << "            \n";
+    cout << "            if square == x:\n";
+    cout << "                return mid\n";
+    cout << "            elif square < x:\n";
+    cout << "                left = mid + 1\n";
+    cout << "            else:\n";
+    cout << "                right = mid - 1\n";
+    cout << "        \n";
+    cout << "        return right\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var mySqrt = function(x) {\n";
+    cout << "    if (x === 0) return 0;\n";
+    cout << "    \n";
+    cout << "    let left = 1, right = x;\n";
+    cout << "    while (left <= right) {\n";
+    cout << "        const mid = Math.floor((left + right) / 2);\n";
+    cout << "        const square = mid * mid;\n";
+    cout << "        \n";
+    cout << "        if (square === x) return mid;\n";
+    cout << "        else if (square < x) left = mid + 1;\n";
+    cout << "        else right = mid - 1;\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return right;\n";
+    cout << "};\n\n";
+
+    cout << "Example:\n";
+    cout << "Input: 8\n";
+    cout << "Output: 2 (sqrt(8) = 2.828...)\n\n";
+}
+
 void problem147() {
     while (true) {
         int choice = displaySubmenu("Problem 147: Sqrt(x)");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nBinary search on [1, x]. Find largest mid where mid*mid <= x.\n"; waitForEnter(); break;
+            case 1: problem147_viewTutorial(); waitForEnter(); break;
             case 2: { Solution147 sol; cout << "\nsqrt(8) = " << sol.mySqrt(8) << " (Expected: 2)\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -1923,12 +2673,108 @@ public:
     }
 };
 
+void problem148_viewTutorial() {
+    printDivider();
+    cout << "                        Problem 148: Min Stack\n";
+    printDivider();
+    cout << "Description: Design a stack that supports push, pop, top, and retrieving minimum element in constant time.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use two stacks: main stack for elements, min stack for minimums\n";
+    cout << "2. Push to min stack only when new element <= current minimum\n";
+    cout << "3. Pop from min stack only when popped element equals current minimum\n";
+    cout << "4. getMin() always returns top of min stack\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <stack>\nusing namespace std;\n\n";
+    cout << "class MinStack {\n";
+    cout << "private:\n";
+    cout << "    stack<int> mainStack;\n";
+    cout << "    stack<int> minStack;\n";
+    cout << "\n";
+    cout << "public:\n";
+    cout << "    MinStack() {}\n";
+    cout << "    \n";
+    cout << "    void push(int val) {\n";
+    cout << "        mainStack.push(val);\n";
+    cout << "        if (minStack.empty() || val <= minStack.top()) {\n";
+    cout << "            minStack.push(val);\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    void pop() {\n";
+    cout << "        if (mainStack.top() == minStack.top()) {\n";
+    cout << "            minStack.pop();\n";
+    cout << "        }\n";
+    cout << "        mainStack.pop();\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    int top() {\n";
+    cout << "        return mainStack.top();\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    int getMin() {\n";
+    cout << "        return minStack.top();\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class MinStack:\n";
+    cout << "    def __init__(self):\n";
+    cout << "        self.main_stack = []\n";
+    cout << "        self.min_stack = []\n";
+    cout << "    \n";
+    cout << "    def push(self, val):\n";
+    cout << "        self.main_stack.append(val)\n";
+    cout << "        if not self.min_stack or val <= self.min_stack[-1]:\n";
+    cout << "            self.min_stack.append(val)\n";
+    cout << "    \n";
+    cout << "    def pop(self):\n";
+    cout << "        if self.main_stack[-1] == self.min_stack[-1]:\n";
+    cout << "            self.min_stack.pop()\n";
+    cout << "        self.main_stack.pop()\n";
+    cout << "    \n";
+    cout << "    def top(self):\n";
+    cout << "        return self.main_stack[-1]\n";
+    cout << "    \n";
+    cout << "    def getMin(self):\n";
+    cout << "        return self.min_stack[-1]\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var MinStack = function() {\n";
+    cout << "    this.mainStack = [];\n";
+    cout << "    this.minStack = [];\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MinStack.prototype.push = function(val) {\n";
+    cout << "    this.mainStack.push(val);\n";
+    cout << "    if (this.minStack.length === 0 || val <= this.minStack[this.minStack.length - 1]) {\n";
+    cout << "        this.minStack.push(val);\n";
+    cout << "    }\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MinStack.prototype.pop = function() {\n";
+    cout << "    if (this.mainStack[this.mainStack.length - 1] === this.minStack[this.minStack.length - 1]) {\n";
+    cout << "        this.minStack.pop();\n";
+    cout << "    }\n";
+    cout << "    this.mainStack.pop();\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MinStack.prototype.top = function() {\n";
+    cout << "    return this.mainStack[this.mainStack.length - 1];\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MinStack.prototype.getMin = function() {\n";
+    cout << "    return this.minStack[this.minStack.length - 1];\n";
+    cout << "};\n\n";
+}
+
 void problem148() {
     while (true) {
         int choice = displaySubmenu("Problem 148: Min Stack");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nTwo stacks: main for elements, min for tracking minimums.\n"; waitForEnter(); break;
+            case 1: problem148_viewTutorial(); waitForEnter(); break;
             case 2: {
                 MinStack stk;
                 stk.push(-2); stk.push(0); stk.push(-3);
@@ -1961,12 +2807,75 @@ public:
     }
 };
 
+void problem149_viewTutorial() {
+    printDivider();
+    cout << "                     Problem 149: Reverse Integer\n";
+    printDivider();
+    cout << "Description: Reverse digits of a 32-bit signed integer. Return 0 if overflow.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Extract digits using modulo 10 (x % 10)\n";
+    cout << "2. Build result by multiplying by 10 and adding digit\n";
+    cout << "3. Remove last digit using integer division (x /= 10)\n";
+    cout << "4. Check for 32-bit integer overflow before returning\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <climits>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int reverse(int x) {\n";
+    cout << "        long long result = 0;\n";
+    cout << "        \n";
+    cout << "        while (x != 0) {\n";
+    cout << "            result = result * 10 + x % 10;\n";
+    cout << "            x /= 10;\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        if (result > INT_MAX || result < INT_MIN) return 0;\n";
+    cout << "        return (int)result;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def reverse(self, x):\n";
+    cout << "        sign = -1 if x < 0 else 1\n";
+    cout << "        x = abs(x)\n";
+    cout << "        result = 0\n";
+    cout << "        \n";
+    cout << "        while x:\n";
+    cout << "            result = result * 10 + x % 10\n";
+    cout << "            x //= 10\n";
+    cout << "        \n";
+    cout << "        result *= sign\n";
+    cout << "        return result if -2**31 <= result <= 2**31 - 1 else 0\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var reverse = function(x) {\n";
+    cout << "    const sign = x < 0 ? -1 : 1;\n";
+    cout << "    x = Math.abs(x);\n";
+    cout << "    let result = 0;\n";
+    cout << "    \n";
+    cout << "    while (x > 0) {\n";
+    cout << "        result = result * 10 + x % 10;\n";
+    cout << "        x = Math.floor(x / 10);\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    result *= sign;\n";
+    cout << "    return (result >= -(2**31) && result <= 2**31 - 1) ? result : 0;\n";
+    cout << "};\n\n";
+
+    cout << "Example:\n";
+    cout << "Input: 123\n";
+    cout << "Output: 321\n\n";
+}
+
 void problem149() {
     while (true) {
         int choice = displaySubmenu("Problem 149: Reverse Integer");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nExtract digits with %10, build result *10. Check overflow.\n"; waitForEnter(); break;
+            case 1: problem149_viewTutorial(); waitForEnter(); break;
             case 2: { Solution149 sol; cout << "\nreverse(123) = " << sol.reverse(123) << " (Expected: 321)\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -2013,12 +2922,111 @@ public:
     }
 };
 
+void problem150_viewTutorial() {
+    printDivider();
+    cout << "               Problem 150: Implement Queue using Stacks\n";
+    printDivider();
+    cout << "Description: Implement FIFO queue using only two stacks. Support push, pop, peek, empty.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use two stacks: inStack for push operations, outStack for pop/peek\n";
+    cout << "2. push(): Always push to inStack\n";
+    cout << "3. pop()/peek(): If outStack empty, transfer all from inStack to outStack\n";
+    cout << "4. This maintains FIFO order: first pushed becomes first popped\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <stack>\nusing namespace std;\n\n";
+    cout << "class MyQueue {\n";
+    cout << "private:\n";
+    cout << "    stack<int> inStack;\n";
+    cout << "    stack<int> outStack;\n";
+    cout << "\n";
+    cout << "public:\n";
+    cout << "    MyQueue() {}\n";
+    cout << "    \n";
+    cout << "    void push(int x) {\n";
+    cout << "        inStack.push(x);\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    int pop() {\n";
+    cout << "        peek();\n";
+    cout << "        int result = outStack.top();\n";
+    cout << "        outStack.pop();\n";
+    cout << "        return result;\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    int peek() {\n";
+    cout << "        if (outStack.empty()) {\n";
+    cout << "            while (!inStack.empty()) {\n";
+    cout << "                outStack.push(inStack.top());\n";
+    cout << "                inStack.pop();\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        return outStack.top();\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    bool empty() {\n";
+    cout << "        return inStack.empty() && outStack.empty();\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class MyQueue:\n";
+    cout << "    def __init__(self):\n";
+    cout << "        self.in_stack = []\n";
+    cout << "        self.out_stack = []\n";
+    cout << "    \n";
+    cout << "    def push(self, x):\n";
+    cout << "        self.in_stack.append(x)\n";
+    cout << "    \n";
+    cout << "    def pop(self):\n";
+    cout << "        self.peek()\n";
+    cout << "        return self.out_stack.pop()\n";
+    cout << "    \n";
+    cout << "    def peek(self):\n";
+    cout << "        if not self.out_stack:\n";
+    cout << "            while self.in_stack:\n";
+    cout << "                self.out_stack.append(self.in_stack.pop())\n";
+    cout << "        return self.out_stack[-1]\n";
+    cout << "    \n";
+    cout << "    def empty(self):\n";
+    cout << "        return not self.in_stack and not self.out_stack\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var MyQueue = function() {\n";
+    cout << "    this.inStack = [];\n";
+    cout << "    this.outStack = [];\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MyQueue.prototype.push = function(x) {\n";
+    cout << "    this.inStack.push(x);\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MyQueue.prototype.pop = function() {\n";
+    cout << "    this.peek();\n";
+    cout << "    return this.outStack.pop();\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MyQueue.prototype.peek = function() {\n";
+    cout << "    if (this.outStack.length === 0) {\n";
+    cout << "        while (this.inStack.length > 0) {\n";
+    cout << "            this.outStack.push(this.inStack.pop());\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    return this.outStack[this.outStack.length - 1];\n";
+    cout << "};\n";
+    cout << "\n";
+    cout << "MyQueue.prototype.empty = function() {\n";
+    cout << "    return this.inStack.length === 0 && this.outStack.length === 0;\n";
+    cout << "};\n\n";
+}
+
 void problem150() {
     while (true) {
         int choice = displaySubmenu("Problem 150: Implement Queue using Stacks");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nTwo stacks: inStack for push, outStack for pop/peek.\n"; waitForEnter(); break;
+            case 1: problem150_viewTutorial(); waitForEnter(); break;
             case 2: {
                 MyQueue q;
                 q.push(1); q.push(2);
@@ -2074,12 +3082,123 @@ public:
     }
 };
 
+void problem151_viewTutorial() {
+    printDivider();
+    cout << "                     Problem 151: Meeting Rooms III\n";
+    printDivider();
+    cout << "Description: Find the room that held the most meetings when n rooms are available.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use two priority queues: available rooms (min heap), busy rooms (by end time)\n";
+    cout << "2. Sort meetings by start time\n";
+    cout << "3. For each meeting: free rooms, assign to lowest numbered available room\n";
+    cout << "4. If no room available, delay meeting until earliest room is free\n";
+    cout << "5. Track meeting count per room, return room with most meetings\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <vector>\n#include <queue>\n#include <algorithm>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int mostBookedRoom(int n, vector<vector<int>>& meetings) {\n";
+    cout << "        sort(meetings.begin(), meetings.end());\n";
+    cout << "        \n";
+    cout << "        priority_queue<long long, vector<long long>, greater<long long>> available;\n";
+    cout << "        priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> busy;\n";
+    cout << "        \n";
+    cout << "        for (int i = 0; i < n; i++) available.push(i);\n";
+    cout << "        \n";
+    cout << "        vector<int> count(n, 0);\n";
+    cout << "        \n";
+    cout << "        for (auto& meeting : meetings) {\n";
+    cout << "            long long start = meeting[0], end = meeting[1];\n";
+    cout << "            \n";
+    cout << "            while (!busy.empty() && busy.top().first <= start) {\n";
+    cout << "                available.push(busy.top().second);\n";
+    cout << "                busy.pop();\n";
+    cout << "            }\n";
+    cout << "            \n";
+    cout << "            if (!available.empty()) {\n";
+    cout << "                int room = available.top();\n";
+    cout << "                available.pop();\n";
+    cout << "                count[room]++;\n";
+    cout << "                busy.push({end, room});\n";
+    cout << "            } else {\n";
+    cout << "                auto earliest = busy.top();\n";
+    cout << "                busy.pop();\n";
+    cout << "                int room = earliest.second;\n";
+    cout << "                count[room]++;\n";
+    cout << "                busy.push({earliest.first + (end - start), room});\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return max_element(count.begin(), count.end()) - count.begin();\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "import heapq\n\n";
+    cout << "class Solution:\n";
+    cout << "    def mostBookedRoom(self, n, meetings):\n";
+    cout << "        meetings.sort()\n";
+    cout << "        \n";
+    cout << "        available = list(range(n))\n";
+    cout << "        busy = []\n";
+    cout << "        count = [0] * n\n";
+    cout << "        \n";
+    cout << "        for start, end in meetings:\n";
+    cout << "            while busy and busy[0][0] <= start:\n";
+    cout << "                _, room = heapq.heappop(busy)\n";
+    cout << "                heapq.heappush(available, room)\n";
+    cout << "            \n";
+    cout << "            if available:\n";
+    cout << "                room = heapq.heappop(available)\n";
+    cout << "                count[room] += 1\n";
+    cout << "                heapq.heappush(busy, (end, room))\n";
+    cout << "            else:\n";
+    cout << "                earliest_end, room = heapq.heappop(busy)\n";
+    cout << "                count[room] += 1\n";
+    cout << "                heapq.heappush(busy, (earliest_end + (end - start), room))\n";
+    cout << "        \n";
+    cout << "        return count.index(max(count))\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var mostBookedRoom = function(n, meetings) {\n";
+    cout << "    meetings.sort((a, b) => a[0] - b[0]);\n";
+    cout << "    \n";
+    cout << "    const available = new MinPriorityQueue();\n";
+    cout << "    const busy = new MinPriorityQueue({ priority: x => x[0] });\n";
+    cout << "    \n";
+    cout << "    for (let i = 0; i < n; i++) available.enqueue(i);\n";
+    cout << "    \n";
+    cout << "    const count = new Array(n).fill(0);\n";
+    cout << "    \n";
+    cout << "    for (const [start, end] of meetings) {\n";
+    cout << "        while (!busy.isEmpty() && busy.front().element[0] <= start) {\n";
+    cout << "            const room = busy.dequeue().element[1];\n";
+    cout << "            available.enqueue(room);\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        if (!available.isEmpty()) {\n";
+    cout << "            const room = available.dequeue().element;\n";
+    cout << "            count[room]++;\n";
+    cout << "            busy.enqueue([end, room]);\n";
+    cout << "        } else {\n";
+    cout << "            const [earliestEnd, room] = busy.dequeue().element;\n";
+    cout << "            count[room]++;\n";
+    cout << "            busy.enqueue([earliestEnd + (end - start), room]);\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return count.indexOf(Math.max(...count));\n";
+    cout << "};\n\n";
+}
+
 void problem151() {
     while (true) {
         int choice = displaySubmenu("Problem 151: Meeting Rooms III");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nPriority queues: available rooms, busy rooms with end times.\n"; waitForEnter(); break;
+            case 1: problem151_viewTutorial(); waitForEnter(); break;
             case 2: { Solution151 sol; vector<vector<int>> meetings = {{0,10},{1,5},{2,7},{3,4}}; cout << "\nResult: " << sol.mostBookedRoom(2, meetings) << "\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -2126,12 +3245,119 @@ public:
     }
 };
 
+void problem152_viewTutorial() {
+    printDivider();
+    cout << "               Problem 152: Path With Maximum Minimum Value\n";
+    printDivider();
+    cout << "Description: Find path from top-left to bottom-right that maximizes the minimum value on the path.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Use modified Dijkstra's algorithm with max-heap priority queue\n";
+    cout << "2. Priority is the minimum value encountered on path so far\n";
+    cout << "3. Always explore path with highest minimum value first\n";
+    cout << "4. Update minimum when moving to adjacent cell\n";
+    cout << "5. Return minimum value when reaching destination\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <vector>\n#include <queue>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    int maximumMinimumPath(vector<vector<int>>& grid) {\n";
+    cout << "        int m = grid.size(), n = grid[0].size();\n";
+    cout << "        \n";
+    cout << "        vector<vector<int>> dirs = {{0,1},{1,0},{0,-1},{-1,0}};\n";
+    cout << "        priority_queue<vector<int>> pq;\n";
+    cout << "        vector<vector<bool>> visited(m, vector<bool>(n, false));\n";
+    cout << "        \n";
+    cout << "        pq.push({grid[0][0], 0, 0});\n";
+    cout << "        \n";
+    cout << "        while (!pq.empty()) {\n";
+    cout << "            auto curr = pq.top(); pq.pop();\n";
+    cout << "            int val = curr[0], x = curr[1], y = curr[2];\n";
+    cout << "            \n";
+    cout << "            if (visited[x][y]) continue;\n";
+    cout << "            visited[x][y] = true;\n";
+    cout << "            \n";
+    cout << "            if (x == m - 1 && y == n - 1) return val;\n";
+    cout << "            \n";
+    cout << "            for (auto& dir : dirs) {\n";
+    cout << "                int nx = x + dir[0], ny = y + dir[1];\n";
+    cout << "                if (nx >= 0 && nx < m && ny >= 0 && ny < n && !visited[nx][ny]) {\n";
+    cout << "                    pq.push({min(val, grid[nx][ny]), nx, ny});\n";
+    cout << "                }\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return -1;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "import heapq\n\n";
+    cout << "class Solution:\n";
+    cout << "    def maximumMinimumPath(self, grid):\n";
+    cout << "        m, n = len(grid), len(grid[0])\n";
+    cout << "        \n";
+    cout << "        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n";
+    cout << "        pq = [(-grid[0][0], 0, 0)]  # Use negative for max heap\n";
+    cout << "        visited = set()\n";
+    cout << "        \n";
+    cout << "        while pq:\n";
+    cout << "            val, x, y = heapq.heappop(pq)\n";
+    cout << "            val = -val  # Convert back to positive\n";
+    cout << "            \n";
+    cout << "            if (x, y) in visited:\n";
+    cout << "                continue\n";
+    cout << "            visited.add((x, y))\n";
+    cout << "            \n";
+    cout << "            if x == m - 1 and y == n - 1:\n";
+    cout << "                return val\n";
+    cout << "            \n";
+    cout << "            for dx, dy in directions:\n";
+    cout << "                nx, ny = x + dx, y + dy\n";
+    cout << "                if 0 <= nx < m and 0 <= ny < n and (nx, ny) not in visited:\n";
+    cout << "                    heapq.heappush(pq, (-min(val, grid[nx][ny]), nx, ny))\n";
+    cout << "        \n";
+    cout << "        return -1\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var maximumMinimumPath = function(grid) {\n";
+    cout << "    const m = grid.length, n = grid[0].length;\n";
+    cout << "    \n";
+    cout << "    const directions = [[0,1],[1,0],[0,-1],[-1,0]];\n";
+    cout << "    const pq = new MaxPriorityQueue({ priority: x => x[0] });\n";
+    cout << "    const visited = new Set();\n";
+    cout << "    \n";
+    cout << "    pq.enqueue([grid[0][0], 0, 0]);\n";
+    cout << "    \n";
+    cout << "    while (!pq.isEmpty()) {\n";
+    cout << "        const [val, x, y] = pq.dequeue().element;\n";
+    cout << "        \n";
+    cout << "        const key = `${x},${y}`;\n";
+    cout << "        if (visited.has(key)) continue;\n";
+    cout << "        visited.add(key);\n";
+    cout << "        \n";
+    cout << "        if (x === m - 1 && y === n - 1) return val;\n";
+    cout << "        \n";
+    cout << "        for (const [dx, dy] of directions) {\n";
+    cout << "            const nx = x + dx, ny = y + dy;\n";
+    cout << "            const newKey = `${nx},${ny}`;\n";
+    cout << "            if (nx >= 0 && nx < m && ny >= 0 && ny < n && !visited.has(newKey)) {\n";
+    cout << "                pq.enqueue([Math.min(val, grid[nx][ny]), nx, ny]);\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    return -1;\n";
+    cout << "};\n\n";
+}
+
 void problem152() {
     while (true) {
         int choice = displaySubmenu("Problem 152: Path With Maximum Minimum Value");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nDijkstra-like: priority queue with max-heap, track minimum on path.\n"; waitForEnter(); break;
+            case 1: problem152_viewTutorial(); waitForEnter(); break;
             case 2: { Solution152 sol; vector<vector<int>> grid = {{5,4,5},{1,2,6},{7,4,6}}; cout << "\nResult: " << sol.maximumMinimumPath(grid) << "\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
@@ -2175,12 +3401,107 @@ public:
     }
 };
 
+void problem153_viewTutorial() {
+    printDivider();
+    cout << "                     Problem 153: Multiply Strings\n";
+    printDivider();
+    cout << "Description: Multiply two non-negative integers represented as strings.\n\n";
+
+    cout << "Tutorial:\n";
+    cout << "1. Simulate grade-school multiplication algorithm\n";
+    cout << "2. Create result array of size m+n (max possible digits)\n";
+    cout << "3. Multiply each digit pair and add to appropriate position\n";
+    cout << "4. Handle carries: digit at position i*j goes to result[i+j] and result[i+j+1]\n";
+    cout << "5. Convert result array to string, skip leading zeros\n\n";
+
+    cout << "C++ Solution:\n";
+    cout << "#include <string>\n#include <vector>\nusing namespace std;\n\n";
+    cout << "class Solution {\n";
+    cout << "public:\n";
+    cout << "    string multiply(string num1, string num2) {\n";
+    cout << "        if (num1 == \"0\" || num2 == \"0\") return \"0\";\n";
+    cout << "        \n";
+    cout << "        int m = num1.length(), n = num2.length();\n";
+    cout << "        vector<int> result(m + n, 0);\n";
+    cout << "        \n";
+    cout << "        for (int i = m - 1; i >= 0; i--) {\n";
+    cout << "            for (int j = n - 1; j >= 0; j--) {\n";
+    cout << "                int mul = (num1[i] - '0') * (num2[j] - '0');\n";
+    cout << "                int p1 = i + j, p2 = i + j + 1;\n";
+    cout << "                int sum = mul + result[p2];\n";
+    cout << "                \n";
+    cout << "                result[p2] = sum % 10;\n";
+    cout << "                result[p1] += sum / 10;\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        string str = \"\";\n";
+    cout << "        for (int i = 0; i < result.size(); i++) {\n";
+    cout << "            if (!(str.empty() && result[i] == 0)) {\n";
+    cout << "                str += to_string(result[i]);\n";
+    cout << "            }\n";
+    cout << "        }\n";
+    cout << "        \n";
+    cout << "        return str.empty() ? \"0\" : str;\n";
+    cout << "    }\n";
+    cout << "};\n\n";
+
+    cout << "Python Solution:\n";
+    cout << "class Solution:\n";
+    cout << "    def multiply(self, num1, num2):\n";
+    cout << "        if num1 == \"0\" or num2 == \"0\":\n";
+    cout << "            return \"0\"\n";
+    cout << "        \n";
+    cout << "        m, n = len(num1), len(num2)\n";
+    cout << "        result = [0] * (m + n)\n";
+    cout << "        \n";
+    cout << "        for i in range(m - 1, -1, -1):\n";
+    cout << "            for j in range(n - 1, -1, -1):\n";
+    cout << "                mul = int(num1[i]) * int(num2[j])\n";
+    cout << "                p1, p2 = i + j, i + j + 1\n";
+    cout << "                total = mul + result[p2]\n";
+    cout << "                \n";
+    cout << "                result[p2] = total % 10\n";
+    cout << "                result[p1] += total // 10\n";
+    cout << "        \n";
+    cout << "        # Convert to string and remove leading zeros\n";
+    cout << "        result_str = ''.join(map(str, result)).lstrip('0')\n";
+    cout << "        return result_str if result_str else \"0\"\n\n";
+
+    cout << "JavaScript Solution:\n";
+    cout << "var multiply = function(num1, num2) {\n";
+    cout << "    if (num1 === \"0\" || num2 === \"0\") return \"0\";\n";
+    cout << "    \n";
+    cout << "    const m = num1.length, n = num2.length;\n";
+    cout << "    const result = new Array(m + n).fill(0);\n";
+    cout << "    \n";
+    cout << "    for (let i = m - 1; i >= 0; i--) {\n";
+    cout << "        for (let j = n - 1; j >= 0; j--) {\n";
+    cout << "            const mul = parseInt(num1[i]) * parseInt(num2[j]);\n";
+    cout << "            const p1 = i + j, p2 = i + j + 1;\n";
+    cout << "            const sum = mul + result[p2];\n";
+    cout << "            \n";
+    cout << "            result[p2] = sum % 10;\n";
+    cout << "            result[p1] += Math.floor(sum / 10);\n";
+    cout << "        }\n";
+    cout << "    }\n";
+    cout << "    \n";
+    cout << "    // Convert to string and remove leading zeros\n";
+    cout << "    let str = result.join('').replace(/^0+/, '');\n";
+    cout << "    return str || \"0\";\n";
+    cout << "};\n\n";
+
+    cout << "Example:\n";
+    cout << "Input: num1 = \"123\", num2 = \"456\"\n";
+    cout << "Output: \"56088\"\n\n";
+}
+
 void problem153() {
     while (true) {
         int choice = displaySubmenu("Problem 153: Multiply Strings");
         if (choice == -1) { printError("Invalid choice!"); continue; }
         switch (choice) {
-            case 1: cout << "\nGrade-school multiplication: multiply each digit, handle carries.\n"; waitForEnter(); break;
+            case 1: problem153_viewTutorial(); waitForEnter(); break;
             case 2: { Solution153 sol; cout << "\n\"123\" * \"456\" = \"" << sol.multiply("123", "456") << "\" (Expected: \"56088\")\n"; waitForEnter(); break; }
             case 3: printInfo("Custom input simplified."); waitForEnter(); break;
             case 4: printInfo("Visualization simplified."); waitForEnter(); break;
