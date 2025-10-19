@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="02_CA_P134-152.cpp">
+    <None Include="enhanced_test.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="02_CA_P134-152_ENHANCED.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
