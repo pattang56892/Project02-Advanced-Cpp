@@ -18,47 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\AlgorithmLearningPlatform.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\AlgorithmSimulator.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\CodeHighlighter.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ContentWidget.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\HeaderWidget.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ProblemData.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\SidebarWidget.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ThemeManager.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\AlgorithmLearningPlatform.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\AlgorithmSimulator.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\CodeHighlighter.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ContentWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\HeaderWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\SidebarWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ThemeManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ProblemData.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a6664de3-4a4f-46a2-b981-685b3923e509}</ProjectGuid>
-    <RootNamespace>My02CAP134152</RootNamespace>
+    <ProjectGuid>{2c0c5312-7d79-4f7c-89fa-410ca6a891fd}</ProjectGuid>
+    <RootNamespace>My01QtCCalculator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>03_Qt_C++_Calculator</ProjectName>
     <Keyword>QtVS_v304</Keyword>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -131,9 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,9 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,9 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -180,15 +140,25 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <QtMoc Include="01_Qt_C++_Calculator.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </QtMoc>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(QtMsBuild)\qt.targets" Condition="Exists('$(QtMsBuild)\qt.targets')" />
   <ImportGroup Label="ExtensionTargets">

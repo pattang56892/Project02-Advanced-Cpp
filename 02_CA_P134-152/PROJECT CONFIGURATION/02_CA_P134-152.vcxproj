@@ -19,39 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\AlgorithmLearningPlatform.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\AlgorithmSimulator.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\CodeHighlighter.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ContentWidget.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\HeaderWidget.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ProblemData.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\SidebarWidget.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ThemeManager.cpp" />
-    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\main.cpp" />
+    <None Include="enhanced_test.exe" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\AlgorithmLearningPlatform.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\AlgorithmSimulator.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\CodeHighlighter.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ContentWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\HeaderWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\SidebarWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ThemeManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ProblemData.h" />
+    <QtMoc Include="QtMainWindow.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </QtMoc>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -133,7 +113,6 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +129,6 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,7 +143,6 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -182,7 +159,6 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>MODULAR ARCHITECTURE (NEW);MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS;MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

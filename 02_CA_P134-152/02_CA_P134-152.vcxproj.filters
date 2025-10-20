@@ -13,13 +13,74 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\MODULAR ARCHITECTURE %28NEW%29">
+      <UniqueIdentifier>{a38470ba-021c-4bf5-a0fd-f6f37d9e373e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS">
+      <UniqueIdentifier>{f198ff94-e089-48a9-98cb-ac0c2c62f795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MODULAR ARCHITECTURE %28NEW%29">
+      <UniqueIdentifier>{458b6549-9d1d-456f-a0ea-91ceeede2ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS">
+      <UniqueIdentifier>{d3a0ab30-e7b7-4efc-be17-8c5250de9ca3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="enhanced_test.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="02_CA_P134-152_ENHANCED.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\CodeHighlighter.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
     </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ProblemData.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\main.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\AlgorithmLearningPlatform.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\AlgorithmSimulator.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ContentWidget.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\ThemeManager.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\SidebarWidget.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
+    </ClCompile>
+    <ClCompile Include="MODULAR ARCHITECTURE (NEW)\COMPONENT IMPLEMENTATIONS\HeaderWidget.cpp">
+      <Filter>Source Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT IMPLEMENTATIONS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\AlgorithmLearningPlatform.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29</Filter>
+    </QtMoc>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\AlgorithmSimulator.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </QtMoc>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\CodeHighlighter.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </QtMoc>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ContentWidget.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </QtMoc>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\HeaderWidget.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </QtMoc>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\SidebarWidget.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </QtMoc>
+    <QtMoc Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ThemeManager.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MODULAR ARCHITECTURE (NEW)\COMPONENT HEADERS\ProblemData.h">
+      <Filter>Header Files\MODULAR ARCHITECTURE %28NEW%29\COMPONENT HEADERS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
